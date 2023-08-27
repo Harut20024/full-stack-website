@@ -192,9 +192,16 @@ app.use(checkAuthentication);
 
 app.post("/", checkAuthentication, async (req, res) => {
   const { biography, userId, name, img, email } = req.body;
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+  const day = now.getDate().toString().padStart(2, '0');
+  const time = now.toLocaleTimeString();
+  
   
   const newComment = {
     img,
+    data: `${year}-${month}-${day} ${time}`,
     comment: biography,
     id: userId,
     name,

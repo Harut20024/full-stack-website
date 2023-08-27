@@ -102,12 +102,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (response.ok) {
             const userData = await response.json();
             localStorage.setItem('img', userData.img);
-        } else {
-            console.log('Failed to fetch user data:', response.statusText);
-        }
-        const response1 = await fetch('/' + userImg);
-        if (response1.ok) {
-            const userData = await response1.json();
             const userNameElement = document.getElementById('user-name');
             const userImgElement = document.getElementById('user-img');
             userNameElement.textContent = userData.name;
@@ -119,15 +113,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 userImgElement.style.display = 'none';
             }
         } else {
-            console.log('Failed to fetch user data:', response1.statusText);
+            console.log('Failed to fetch user data:', response.statusText);
         }
+       
     } catch (error) {
         console.error('Error fetching user data:', error);
     }
-    
-    
-    
-    
 });
+
 
 
