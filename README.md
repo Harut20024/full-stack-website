@@ -1,5 +1,5 @@
 # My Portfolio Website
-
+![Portfollio](https://github.com/Harut20024/full-stack-website/blob/main/views/screnn/Screenshot_1.png)
 Welcome to my portfolio website repository! This project showcases my full-stack development skills and serves as my personal portfolio website. The website allows visitors to explore my biography, view my work, and leave comments. The comments left by visitors are stored in a database, creating an interactive and dynamic user experience.
 
 ## Features
@@ -44,7 +44,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-If you have any questions or would like to get in touch, you can reach me at 
+If you have any questions or suggestions, please feel free to contact me:
+
+Let's work together to make the Ninja Game even more exciting and enjoyable for players!
+
 
 
 ## if it dont work do this steps
