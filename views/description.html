@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biography</title>
+</head>
+
+<body>
+    <div id="main">
+        <h1>About You</h1>
+        <form id="descrip" method="post">
+            <div class="image-container">
+                <img id="image" width="140" height="140" src="anonim.jfif" alt="anonim">
+            </div>
+            <label for="img">Upload Image</label>
+            <input type="file" id="img" name="img" accept="image/*">
+
+            <label for="biography">Biography</label>
+            <textarea id="biography" name="biography" rows="4" cols="50" placeholder="Enter your biography"
+                autocomplete="off"></textarea>
+
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const image = document.getElementById("image");
+            const imgInput = document.getElementById("img");
+
+            imgInput.addEventListener("change", (e) => {
+                const selectedFile = e.target.files[0];
+                if (selectedFile) {
+                    const objectURL = URL.createObjectURL(selectedFile);
+                    image.src = objectURL;
+                }
+            });
+
+            const descrip = document.getElementById('descrip');
+
+            descrip.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                let userId = await localStorage.getItem('id');
+                localStorage.removeItem('id');
+
+                const formData = new FormData();
+                formData.append('userId', userId);
+                formData.append('biography', e.target.biography.value);
+                formData.append('img', e.target.img.files[0]);
+
+                fetch('/descrip', {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(() => {
+                        window.location.href = '/';
+                    })
+                    .catch((e) => console.log(e))
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital@1&family=Qwitcher+Grypen&family=Roboto:ital,wght@1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="appStyle.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App</title>
+</head>
+
+<body>
+    <div class="video-background">
+        <video autoplay muted loop id="video-background">
+            <source src="backgraund1.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="content">
+        <nav class="menu-bar">
+            <ul class="menu-list">
+                <li><a href="#about" onclick="smoothScroll('about')">About</a></li>
+                <li><a href="#my-works" onclick="smoothScroll('my-works')">My Works</a></li>
+                <li><a href="#Contact" onclick="smoothScroll('Contactworks')">Contact</a></li>
+            </ul>
+            <a id="logout" href="/logout"><span class="logout-text">LOG OUT</span></a>
+        </nav>
+
+        <div class="start-container">
+            <video autoplay muted loop id="background-video">
+                <source src="intro.mp4" type="video/mp4">
+            </video>
+            <div class="text-container">
+                <h1 class="fade-in">WELCOME</h1>
+                <h4 class="fade-in delay">to my page</h4>
+            </div>
+        </div>
+
+        <div class="centered-content">
+            <div id="main">
+                <div id="about" class="cv-container">
+                    <div id="cv-left">
+                        <img id="profil" src="profil.jpeg" alt="">
+                    </div>
+                    <div id="cv-right">
+                        👋Greetings, I am Harut, an developer. My specialization lies in the <br>
+                        realm of programming, particularly in languages such as Node.js, CSS, and JavaScript.<br>
+                        <br>
+                        🌟My experience transcends mere coding, as I also serve as a learning coach at TUMO. In this
+                        role, I
+                        guide<br>
+                        students through the intricacies of programming, imparting fundamental concepts and fostering
+                        their
+                        creative<br>
+                        problem-solving skills.<br>
+                        <br>
+                        🔍 What truly distinguishes me is my unwavering commitment to staying abreast of industry
+                        advancements.
+                        I
+                        am<br>
+                        dedicated to exploring emerging trends and technologies, ensuring that my expertise remains
+                        up-to-date
+                        and<br>
+                        relevant.<br>
+                        <br>
+                        🚀If you are in pursuit of a programming enthusiast who possesses not only technical prowess but
+                        also
+                        a<br>
+                        passion for mentoring and innovation, I invite us to connect. I am eager to delve into how I can
+                        contribute<br>
+                        to your projects and deliver meaningful results.<br>
+                    </div>
+                </div>
+                <div class="cv-container2" id="my-works">
+                    <h1>My Works</h1>
+                    <h2 class="animate-trigger">Ninja Game</h2>
+                    <div class="cv-content">
+                        <div class="cv-left">
+                            <img width="500" height="300" src="screen.png" alt="">
+                        </div>
+                        <div class="cv-right">
+                            <p>
+                                "Dive into the Ninja Game universe and become a fearless ninja defending against
+                                relentless
+                                knights.<br>
+                                Survive by flinging stars and using elixirs to leap. Secure victory by collecting
+                                scores.<br>
+                                Navigate with arrow keys, launch stars with the spacebar, and jump using elixirs.<br>
+                                Stay alert for knight attacks! The game follows OOP principles for seamless integration
+                                of
+                                elements.<br>
+                                Join us in enhancing the Ninja Game for maximum excitement and engagement."
+                            </p>
+                            <p>
+                                Check out the game on GitHub:<a
+                                    href="https://github.com/Harut20024/Ninja-Game/tree/main" target="_blank">Ninja
+                                    Game</a>
+                            </p>
+                        </div>
+                    </div>
+                    <br>
+                    <h2>Mermaid Game</h2>
+                    <div class="cv-content">
+                        <div class="cv-left">
+                            <img width="450" height="300" src="screen1.png" alt="">
+                        </div>
+                        <div class="cv-right">
+                            <p>"Discover the captivating realm of the Mermaid Game, where an underwater odyssey awaits.
+                                Immerse yourself in an engaging adventure of matching and collecting objects to clear
+                                the
+                                mesmerizing game board. Experience the excitement of skillful swapping, explosive bombs,
+                                and
+                                the allure of special buttons. Get ready to be immersed in a world of challenges and
+                                rewards
+                                as you dive into this enchanting journey beneath the waves."</p>
+                            <p>
+                                Check out the game on GitHub:<a href="https://github.com/Harut20024/Mermaid"
+                                    target="_blank">Mermaid Game</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="" class="cv-containerCom">
+                    <h1>Comments</h1>
+                    <div class="user-info">
+                        <img id="user-img" src="" alt="User Image" style="max-width: 300px;">
+                        <p>Name: <span id="user-name"></span></p><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="Contact" class="cv-container3">
+        <h2>Follow</h2>
+        <div class="follow-section">
+            <div class="follow-column">
+                <a href="https://www.facebook.com/harutyun.tarzyan">Facebook</a>
+                <a href="https://www.instagram.com/harut20024/">Instagram</a>
+            </div>
+            <div class="follow-column">
+                <a href="https://github.com/Harut20024">GitHub</a>
+                <a href="https://www.linkedin.com/in/tharzyan/">linkedin</a>
+            </div>
+        </div>
+        <form id="regForm" method="POST" action="/">
+            <textarea id="biography" name="biography" rows="4" cols="50" placeholder="Enter your Coment"
+                autocomplete="off"></textarea>
+            <input type="hidden" name="userId" value="<%= userId %>" />
+            <button type="submit">Send</button>
+        </form>
+
+
+        <p>© Harut Portfolio 2023</p>
+    </div>
+    <script src="appscript.js"></script>
+</body>
+
+</html>
+
+
+<!-- <div id="user-info">
+    
+</div> -->

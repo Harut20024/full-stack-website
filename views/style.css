@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('Backgraund.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+
+#image {
+    width: 160px;
+    height: 160px;
+    border-radius: 80px; 
+    object-fit: cover;
+}
+
+#main {
+    background-color: rgba(1, 2, 3, 0.5);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #fdfdfd;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #f4f4f4;
+    margin-right: 5px;
+}
+
+.labels{
+    margin-left: 30px;
+}
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    width: 100px;
+    background-color: #FE1BA9;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    align-items: center;
+    margin: 5px auto; /* Center horizontally */
+}
+
+button:hover {
+    background-color: #d21c8f;
+}
+
+a {
+    padding: 10px;
+    color: #FE1BA9;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #d21c8f;
+}
+
+/* Additional styling for responsive layout */
+@media (max-width: 600px) {
+    #main {
+        width: 90%;
+    }
+}

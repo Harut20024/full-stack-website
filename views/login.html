@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <div id="main">
+        <h1>Login</h1>
+        <form action="/login" method="POST">
+            <div>
+                <label class="labels">Email</label>
+                <input type="email" name="email" required />
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" required />
+            </div>
+
+            <button type="submit">Login</button>
+            <a href="/register">Register</a>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.querySelector('form');
+    
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+    
+                const email = document.querySelector('input[name="email"]').value;
+                const password = document.querySelector('input[name="password"]').value;
+    
+                const data = { email, password };
+    
+                try {
+                    const response = await fetch('/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+    
+                    if (response.ok) {
+                        const userId = await response.json();
+                        localStorage.setItem('id', userId);
+                        console.log('Login successful');
+                        window.location.href = '/';
+                    } else {
+                        console.log('Login failed');
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

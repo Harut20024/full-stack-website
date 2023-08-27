@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+    <h1>Register</h1>
+    <form  id="regForm" method="POST">
+        <div>
+            <label class="labels">Name</label>
+            <input type="text" name="name" required />
+        </div>
+        <div>
+            <label class="labels">Email</label>
+            <input type="email" name="email" required />
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" required />
+        </div>
+        
+        <input type="hidden" name="userId" value="<%= userId %>" />
+
+        <button type="submit">Register</button>
+        <a href="/login">Login</a>
+
+    </form>
+
+
+    <script>
+        
+        const regForm = document.getElementById('regForm');
+        regForm.addEventListener('submit',(e)=>{
+            e.preventDefault();
+
+
+            const name = e.target[0].value;
+            const email = e.target[1].value;
+            const password = e.target[2].value;
+
+
+            const data = {
+                name,
+                email,
+                password
+            }
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(userId => {
+                    localStorage.setItem('id', userId);
+                })
+                .then(()=>{
+                    window.location.href = '/descrip';
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+
+
+        })
+
+    </script>
+    </div>
+</body>
+</html>
