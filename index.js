@@ -188,7 +188,20 @@ app.get("/logout", (req, res) => {
 });
 
 
+
 app.use(checkAuthentication);
+
+app.get("/comments", async (req, res) => {
+  try {
+    const data = await fsPromises.readFile("coment.json");
+    const comments = JSON.parse(data);
+
+    res.json(comments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 app.post("/", checkAuthentication, async (req, res) => {
   const { biography, userId, name, img, email } = req.body;
@@ -243,24 +256,6 @@ app.get("/:id", async (req, res) => {
   }
 });
 
-app.get("/:img", async (req, res) => {
-  const userImg = req.params.img;
-  try {
-      const data = await fsPromises.readFile("coment.json");
-      const users = JSON.parse(data);
-      
-      const user = users.find((user) => user.img === userImg);
-  
-      if (!user) {
-          return res.status(404).json({ error: "User not found" });
-      }
-  
-      res.json(user);
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
-  }
-});
 
 
 

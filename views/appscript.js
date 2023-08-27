@@ -61,7 +61,6 @@ window.addEventListener('scroll', checkScroll);
 document.addEventListener('DOMContentLoaded', async () => {
 
     const userId = localStorage.getItem('id');
-    const userImg = localStorage.getItem('img');
     const biographyForm = document.querySelector('form');
 
     biographyForm.addEventListener('submit', async (event) => {
@@ -95,30 +94,31 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error:', error);
         }
     });
+    
 
     try {
-        
-        const response = await fetch('/' + userId);
-        if (response.ok) {
-            const userData = await response.json();
-            localStorage.setItem('img', userData.img);
-            const userNameElement = document.getElementById('user-name');
-            const userImgElement = document.getElementById('user-img');
-            userNameElement.textContent = userData.name;
-        
-            if (userData.img) {
-                userImgElement.src = '/uploads/' + userData.img;
-                userImgElement.style.display = 'block';
-            } else {
-                userImgElement.style.display = 'none';
-            }
+        const commentsResponse = await fetch('/comments');
+        if (commentsResponse.ok) {
+            const commentsData = await commentsResponse.json();
+            const commentList = document.querySelector('.comment-list');
+            
+            commentsData.forEach(comment => {
+                const commentItem = document.createElement('div');
+                commentItem.classList.add('user-info');
+                commentItem.innerHTML = `
+                    <img id="user-img" src="/uploads/${comment.img}" alt="User Image">
+                    <p>Name: <span class="user-name">${comment.name}</span></p>
+                    <p>Comment: <span class="user-comment">${comment.comment}</span></p>
+                `;
+                commentList.appendChild(commentItem);
+            });
         } else {
-            console.log('Failed to fetch user data:', response.statusText);
+            console.log('Failed to fetch comments:', commentsResponse.statusText);
         }
-       
     } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching comments:', error);
     }
+
 });
 
 
