@@ -41,5 +41,14 @@
     "name": "a",
     "email": "valod@mail.ru",
     "password": "$2b$10$bouwz9PQP6IlasXc2Y5qLehB0MeXZXoiiUDW.7J9QnSBmCKT6/Lhi"
+  },
+  {
+    "id": "1693249180166_0.9703726375086863",
+    "data": "2023-08-28 22:59:40",
+    "name": "Anton",
+    "email": "antonio@mail.ru",
+    "password": "$2b$10$3VB19fdqeMhrMe88ncPF..kX2i349yzESWGXwA8nhTiHZrELZG9da",
+    "biography": "helloowww",
+    "img": "2b001803a62104931c12e219d3e17b38"
   }
 ]
