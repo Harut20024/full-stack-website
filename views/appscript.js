@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const userId = localStorage.getItem('id');
     const biographyForm = document.querySelector('form');
+    const commentList = document.querySelector('.comment-list'); // Reference to the comment list container
 
     biographyForm.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -71,9 +72,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch('/' + userId);
         const userData = await response.json();
         const biography = document.getElementById('biography').value;
-        const name = userData.name
-        const img = userData.img
-        const email = userData.email
+        const name = userData.name;
+        const img = userData.img;
+        const email = userData.email;
+        
         try {
             const response = await fetch('/', {
                 method: 'POST',
@@ -86,42 +88,45 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log(result.message);
-                window.location.href = '/';
-
+                biographyForm.reset(); // Clear the form
+                commentList.innerHTML = ''; // Clear the comment list
+                loadComments(); // Reload comments
             } else {
                 console.log('Error:', response.statusText);
-                // Handle the error response if needed
             }
         } catch (error) {
             console.error('Error:', error);
         }
     });
     
-
-    try {
-        const commentsResponse = await fetch('/comments');
-        if (commentsResponse.ok) {
-            const commentsData = await commentsResponse.json();
-            const commentList = document.querySelector('.comment-list');
-            
-            commentsData.forEach(comment => {
-                const commentItem = document.createElement('div');
-                commentItem.classList.add('user-info');
-                commentItem.innerHTML = `
-                    <img id="user-img" src="/uploads/${comment.img}" alt="User Image">
-                    <p>Name: <span class="user-name">${comment.name}</span></p>
-                    <p>Comment: <span class="user-comment">${comment.comment}</span></p>
-                `;
-                commentList.appendChild(commentItem);
-            });
-        } else {
-            console.log('Failed to fetch comments:', commentsResponse.statusText);
+    // Function to load comments
+    async function loadComments() {
+        try {
+            const commentsResponse = await fetch('/comments');
+            if (commentsResponse.ok) {
+                const commentsData = await commentsResponse.json();
+                commentsData.forEach(comment => {
+                    const commentItem = document.createElement('div');
+                    commentItem.classList.add('user-info');
+                    commentItem.innerHTML = `
+                        <img id="user-img" src="/uploads/${comment.img}" alt="User Image">
+                        <p>Name: <span class="user-name">${comment.name}</span></p>
+                        <p>Comment: <span class="user-comment">${comment.comment}</span></p>
+                    `;
+                    commentList.appendChild(commentItem);
+                });
+            } else {
+                console.log('Failed to fetch comments:', commentsResponse.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching comments:', error);
         }
-    } catch (error) {
-        console.error('Error fetching comments:', error);
     }
 
+    // Initial load of comments
+    loadComments();
 });
+
 
 
 

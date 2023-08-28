@@ -75,6 +75,7 @@ app.get("/register", checkNotAuthentication, (req, res) => {
   res.sendFile(path.resolve("views/register.html"));
 });
 
+
 app.post("/register", async (req, res) => {
 
   const { name, email, password } = req.body;
