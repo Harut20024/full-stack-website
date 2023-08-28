@@ -85,10 +85,9 @@ p {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    /* Center horizontally within the page */
+   
 }
 
-/* Additional styling to center elements within .centered-content */
 .centered-content h2,
 .centered-content p,
 .centered-content img {
@@ -119,7 +118,7 @@ p {
 }
 
 .start-container {
-    height: 650px;
+    height: 100vh; 
     position: relative;
     display: flex;
     justify-content: center;
@@ -127,6 +126,7 @@ p {
     padding: 20px;
     overflow: hidden;
 }
+
 
 #background-video {
     position: absolute;
@@ -190,8 +190,7 @@ p {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.5;
-    /* Set the opacity to make the video semi-transparent */
+    opacity: 0.4; /* Set the opacity to make the video semi-transparent */
     z-index: -1;
 }
 

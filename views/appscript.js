@@ -59,6 +59,8 @@ window.addEventListener('scroll', checkScroll);
 
 
 document.addEventListener('DOMContentLoaded', async () => {
+    const audio = new Audio("photo/music/thunder.mp3");
+    audio.play();
 
     const userId = localStorage.getItem('id');
     const biographyForm = document.querySelector('form');
