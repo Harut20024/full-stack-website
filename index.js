@@ -77,12 +77,11 @@ app.get("/register", checkNotAuthentication, (req, res) => {
 
 
 app.post("/register", async (req, res) => {
-
   const { name, email, password } = req.body;
   const hashedPwd = await bcrypt.hash(password, 10);
   const now = new Date();
   const year = now.getFullYear();
-  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+  const month = (now.getMonth() + 1).toString().padStart(2, '0');
   const day = now.getDate().toString().padStart(2, '0');
   const time = now.toLocaleTimeString();
 
@@ -100,15 +99,8 @@ app.post("/register", async (req, res) => {
     users.push(newUser);
 
     await fsPromises.writeFile("data.json", JSON.stringify(users, null, 2));
-
-    req.login(newUser, (err) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: "Internal server error" });
-      }
-      const userId = newUser.id;
-      return res.json(userId)
-    });
+    const userId = newUser.id;
+    return res.json(userId);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -117,7 +109,8 @@ app.post("/register", async (req, res) => {
 
 
 
-app.get("/descrip", checkAuthentication, (req, res) => {
+
+app.get("/descrip",checkNotAuthentication, (req, res) => {
   res.sendFile(path.resolve("views/description.html"));
 });
 
@@ -164,22 +157,14 @@ app.get("/login", checkNotAuthentication, (req, res) => {
 });
 
 
-app.post("/login", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) {
-      return res.status(500).json({ error: "Internal server error" });
-    }
-    if (!user) {
-      return res.status(401).json({ error: "Authentication failed" });
-    }
-    req.login(user, (err) => {
-      if (err) {
-        return res.status(500).json({ error: "Internal server error" });
-      }
-      return res.json(user.id);
-    });
-  })(req, res, next);
+app.post("/login", passport.authenticate("local"), async (req, res) => {
+  const userId = req.user.id; // Get the user ID from Passport session
+
+  res.json({ userId }); // Respond with the user ID
 });
+
+
+
 
 
 app.get("/logout", (req, res) => {
@@ -211,8 +196,8 @@ app.post("/", checkAuthentication, async (req, res) => {
   const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
   const day = now.getDate().toString().padStart(2, '0');
   const time = now.toLocaleTimeString();
-  
-  
+
+
   const newComment = {
     img,
     data: `${year}-${month}-${day} ${time}`,
@@ -237,28 +222,29 @@ app.post("/", checkAuthentication, async (req, res) => {
 });
 
 
+app.get('/favicon.ico', (req, res) => {
+  res.status(204); // No content
+});
+
 
 app.get("/:id", async (req, res) => {
   const userId = req.params.id;
   try {
-      const data = await fsPromises.readFile("data.json");
-      const users = JSON.parse(data);
-  
-      const user = users.find((user) => user.id === userId);
-  
-      if (!user) {
-          return res.status(404).json({ error: "User not found" });
-      }
-  
-      res.json(user);
+    const data = await fsPromises.readFile("data.json");
+    const users = JSON.parse(data);
+
+    const user = users.find((user) => user.id === userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json(user);
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal server error" });
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
-
-
-
 
 
 

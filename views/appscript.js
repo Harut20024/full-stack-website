@@ -1,81 +1,77 @@
-// Smooth scrolling for menu links
-document.querySelectorAll('.menu-list a').forEach(link => {
-    link.addEventListener('click', smoothScroll);
-});
-
-function smoothScroll(event) {
-    event.preventDefault();
-
-    const target = document.querySelector(this.getAttribute('href'));
-    const targetTop = target.offsetTop;
-
-    window.scrollTo({
-        top: targetTop,
-        behavior: 'smooth'
-    });
-}
-
-
-
-const menuBar = document.querySelector('.menu-bar');
-let isMenuBarVisible = true; // Initialize as true so that the menu bar is visible initially
-
-function toggleMenuBar() {
-    if (window.scrollY <= 50) {
-        if (isMenuBarVisible) {
-            menuBar.style.top = '-100px'; // Adjust the value based on your menu bar's height
-            isMenuBarVisible = false;
-        }
-    } else {
-        if (!isMenuBarVisible) {
-            menuBar.style.top = '0';
-            isMenuBarVisible = true;
-        }
-    }
-}
-
-window.addEventListener('scroll', toggleMenuBar);
-
-const animateElements = document.querySelectorAll('.cv-content');
-const triggerElement = document.querySelector('.animate-trigger');
-
-function checkScroll() {
-    const triggerPosition = triggerElement.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-
-    if (triggerPosition < windowHeight) {
-        animateElements.forEach(element => {
-            element.classList.add('animate');
-        });
-
-        // Remove the scroll event listener after the animation is triggered
-        window.removeEventListener('scroll', checkScroll);
-    }
-}
-
-window.addEventListener('scroll', checkScroll);
-
-
-
-
 document.addEventListener('DOMContentLoaded', async () => {
+
+    document.querySelectorAll('.menu-list a').forEach(link => {
+        link.addEventListener('click', smoothScroll);
+    });
+
+    function smoothScroll(event) {
+        event.preventDefault();
+
+        const target = document.querySelector(this.getAttribute('href'));
+        const targetTop = target.offsetTop;
+
+        window.scrollTo({
+            top: targetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    const menuBar = document.querySelector('.menu-bar');
+    let isMenuBarVisible = true;
+
+    function toggleMenuBar() {
+        if (window.scrollY <= 50) {
+            if (isMenuBarVisible) {
+                menuBar.style.top = '-100px';
+                isMenuBarVisible = false;
+            }
+        } else {
+            if (!isMenuBarVisible) {
+                menuBar.style.top = '0';
+                isMenuBarVisible = true;
+            }
+        }
+    }
+
+    window.addEventListener('scroll', toggleMenuBar);
+
+    const animateElements = document.querySelectorAll('.cv-content');
+    const triggerElement = document.querySelector('.animate-trigger');
+
+    function checkScroll() {
+        const triggerPosition = triggerElement.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (triggerPosition < windowHeight) {
+            animateElements.forEach(element => {
+                element.classList.add('animate');
+            });
+
+            window.removeEventListener('scroll', checkScroll);
+        }
+    }
+
+    window.addEventListener('scroll', checkScroll);
+
     const audio = new Audio("photo/music/thunder.mp3");
     audio.play();
 
     const userId = localStorage.getItem('id');
     const biographyForm = document.querySelector('form');
-    const commentList = document.querySelector('.comment-list'); // Reference to the comment list container
+    const commentList = document.querySelector('.comment-list');
+    const response = await fetch('/' + userId);
+
+    const userData = await response.json();
+    console.log(userData);
+
+    const name = userData.name;
+    const img = userData.img;
+    const email = userData.email;
 
     biographyForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-
-        const response = await fetch('/' + userId);
-        const userData = await response.json();
         const biography = document.getElementById('biography').value;
-        const name = userData.name;
-        const img = userData.img;
-        const email = userData.email;
-        
+
         try {
             const response = await fetch('/', {
                 method: 'POST',
@@ -88,9 +84,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (response.ok) {
                 const result = await response.json();
                 console.log(result.message);
-                biographyForm.reset(); // Clear the form
-                commentList.innerHTML = ''; // Clear the comment list
-                loadComments(); // Reload comments
+                biographyForm.reset();
+                commentList.innerHTML = '';
+                loadComments();
             } else {
                 console.log('Error:', response.statusText);
             }
@@ -98,8 +94,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error:', error);
         }
     });
-    
-    // Function to load comments
+
     async function loadComments() {
         try {
             const commentsResponse = await fetch('/comments');
@@ -123,10 +118,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // Initial load of comments
     loadComments();
 });
-
-
-
-
