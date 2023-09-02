@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', async () => {
-
     document.querySelectorAll('.menu-list a').forEach(link => {
         link.addEventListener('click', smoothScroll);
     });
@@ -54,19 +53,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('scroll', checkScroll);
 
     const audio = new Audio("photo/music/thunder.mp3");
+    
     audio.play();
 
     const userId = localStorage.getItem('id');
     const biographyForm = document.querySelector('form');
     const commentList = document.querySelector('.comment-list');
+
+    // Fetch user data
     const response = await fetch('/' + userId);
-
     const userData = await response.json();
-    console.log(userData);
-
     const name = userData.name;
     const img = userData.img;
-    const email = userData.email;
+    const email = userData.email; // You can extract the email if needed
 
     biographyForm.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -81,12 +80,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 body: JSON.stringify({ biography, userId, name, img, email })
             });
 
-            if (response.ok) {
+            if (response.status === 200) {
                 const result = await response.json();
                 console.log(result.message);
                 biographyForm.reset();
                 commentList.innerHTML = '';
-                loadComments();
+                loadComments(); // Reload comments after adding a new one
             } else {
                 console.log('Error:', response.statusText);
             }

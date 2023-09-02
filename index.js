@@ -69,7 +69,9 @@ passport.deserializeUser(async (id, done) => {
     return done(error);
   }
 });
-
+app.get('/favicon.ico', (req, res) => {
+  res.status(204); // No content
+});
 app.get("/register", checkNotAuthentication, (req, res) => {
 
   res.sendFile(path.resolve("views/register.html"));
@@ -189,7 +191,7 @@ app.get("/comments", async (req, res) => {
   }
 });
 
-app.post("/", checkAuthentication, async (req, res) => {
+app.post("/", async (req, res) => {
   const { biography, userId, name, img, email } = req.body;
   const now = new Date();
   const year = now.getFullYear();
@@ -219,11 +221,6 @@ app.post("/", checkAuthentication, async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-});
-
-
-app.get('/favicon.ico', (req, res) => {
-  res.status(204); // No content
 });
 
 
