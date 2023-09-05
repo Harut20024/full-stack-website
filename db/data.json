@@ -9,10 +9,21 @@
     "img": "deb8c2574ff707d417dc6f6a49bed67b"
   },
   {
-    "id": "1693919421648_0.6090673879212685",
-    "data": "2023-09-05 5:10:21 PM",
-    "name": "asd",
-    "email": "adadadadad@a",
-    "password": "$2b$10$OWHwgF5w7rdukOWzp.xBce53V3VdmeGcw7zygQp7GGanFmBchtk72"
+    "id": "1693943562315_0.9963609620869962",
+    "data": "2023-09-05 23:52:42",
+    "name": "Tiko",
+    "email": "tiki@mail.ru",
+    "password": "$2b$10$kBpSMyF2S5sQUsnxi50DDuBxxn9iUCabXT8dhfgWBzkQI4kq8m4.G",
+    "biography": "I am Tigran",
+    "img": "d8b75a00be0af12e4563e33c89cf3d43"
+  },
+  {
+    "id": "1693948820701_0.9697744158131645",
+    "data": "2023-09-06 01:20:20",
+    "name": "admin",
+    "email": "admin@a",
+    "password": "$2b$10$WshQC0AgwPSRC0XfeI/PEOfvSqrCPqO5I3fb17pHTtImISOJ3hCxC",
+    "biography": "I am admin",
+    "img": "dbba31e204c973cd27f0f83d063187d0"
   }
 ]

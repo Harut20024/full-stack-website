@@ -1,4 +1,13 @@
+
 document.addEventListener('DOMContentLoaded', async () => {
+    const ending = document.getElementById("Portfolio")
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const day = now.getDate().toString().padStart(2, '0');
+
+    ending.innerHTML = `© Harut Portfolio ${day}/${month}/${year}`
+
     document.querySelectorAll('.menu-list a').forEach(link => {
         link.addEventListener('click', smoothScroll);
     });
@@ -53,12 +62,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('scroll', checkScroll);
 
     const audio = new Audio("photo/music/thunder.mp3");
-    
+
     audio.play();
 
 
 
-    
+
     const userId = localStorage.getItem('id');
     const biographyForm = document.querySelector('form');
     const commentList = document.querySelector('.comment-list');
@@ -68,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userData = await response.json();
     const name = userData.name;
     const img = userData.img;
-    const email = userData.email; 
+    const email = userData.email;
 
     biographyForm.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -88,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.log(result.message);
                 biographyForm.reset();
                 commentList.innerHTML = '';
-                loadComments(); 
+                loadComments();
             } else {
                 console.log('Error:', response.statusText);
             }
