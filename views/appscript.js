@@ -56,6 +56,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     audio.play();
 
+
+
+    
     const userId = localStorage.getItem('id');
     const biographyForm = document.querySelector('form');
     const commentList = document.querySelector('.comment-list');
@@ -65,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userData = await response.json();
     const name = userData.name;
     const img = userData.img;
-    const email = userData.email; // You can extract the email if needed
+    const email = userData.email; 
 
     biographyForm.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 console.log(result.message);
                 biographyForm.reset();
                 commentList.innerHTML = '';
-                loadComments(); // Reload comments after adding a new one
+                loadComments(); 
             } else {
                 console.log('Error:', response.statusText);
             }

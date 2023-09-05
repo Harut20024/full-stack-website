@@ -4,7 +4,7 @@ import path from "path";
 import bcrypt from "bcrypt";
 import passport from "passport";
 import passportLocal from "passport-local";
-import multer from "multer"; // Add Multer for image uploads
+import multer from "multer"; 
 import { promises as fsPromises } from "fs";
 
 const app = express();
@@ -28,7 +28,7 @@ passport.use(new passportLocal.Strategy({
   usernameField: "email"
 }, async (email, password, done) => {
   try {
-    const data = await fsPromises.readFile("data.json");
+    const data = await fsPromises.readFile("./db/data.json");
     const users = JSON.parse(data);
 
     const user = users.find((user) => user.email === email);
@@ -55,7 +55,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const data = await fsPromises.readFile("data.json");
+    const data = await fsPromises.readFile("./db/data.json");
     const users = JSON.parse(data);
 
     const user = users.find((user) => user.id === id);
@@ -69,9 +69,11 @@ passport.deserializeUser(async (id, done) => {
     return done(error);
   }
 });
+
 app.get('/favicon.ico', (req, res) => {
-  res.status(204); // No content
+  res.status(204); 
 });
+
 app.get("/register", checkNotAuthentication, (req, res) => {
 
   res.sendFile(path.resolve("views/register.html"));
@@ -96,11 +98,11 @@ app.post("/register", async (req, res) => {
   };
 
   try {
-    const data = await fsPromises.readFile("data.json");
+    const data = await fsPromises.readFile("./db/data.json");
     const users = JSON.parse(data);
     users.push(newUser);
 
-    await fsPromises.writeFile("data.json", JSON.stringify(users, null, 2));
+    await fsPromises.writeFile("./db/data.json", JSON.stringify(users, null, 2));
     const userId = newUser.id;
     return res.json(userId);
   } catch (error) {
@@ -120,7 +122,7 @@ app.post("/descrip", upload.single('img'), async (req, res) => {
   try {
     const { img, biography, userId } = req.body;
 
-    const data = await fsPromises.readFile("data.json");
+    const data = await fsPromises.readFile("./db/data.json");
     let users;
 
     try {
@@ -136,10 +138,10 @@ app.post("/descrip", upload.single('img'), async (req, res) => {
     }
 
     users[userIndex].biography = biography;
-    users[userIndex].img = req.file.filename; // Store the filename of the uploaded image
+    users[userIndex].img = req.file.filename; 
 
     try {
-      await fsPromises.writeFile("data.json", JSON.stringify(users, null, 2));
+      await fsPromises.writeFile("./db/data.json", JSON.stringify(users, null, 2));
     } catch (writeError) {
       throw new Error(`Error writing file: ${writeError.message}`);
     }
@@ -181,7 +183,7 @@ app.use(checkAuthentication);
 
 app.get("/comments", async (req, res) => {
   try {
-    const data = await fsPromises.readFile("coment.json");
+    const data = await fsPromises.readFile("./db/coment.json");
     const comments = JSON.parse(data);
 
     res.json(comments);
@@ -210,11 +212,11 @@ app.post("/", async (req, res) => {
   };
 
   try {
-    const data = await fsPromises.readFile("coment.json", "utf-8");
+    const data = await fsPromises.readFile("./db/coment.json", "utf-8");
     const users = JSON.parse(data);
     users.push(newComment);
 
-    await fsPromises.writeFile("coment.json", JSON.stringify(users, null, 2));
+    await fsPromises.writeFile("./db/coment.json", JSON.stringify(users, null, 2));
 
     return res.json({ message: "Comment saved successfully" });
   } catch (error) {
@@ -227,7 +229,7 @@ app.post("/", async (req, res) => {
 app.get("/:id", async (req, res) => {
   const userId = req.params.id;
   try {
-    const data = await fsPromises.readFile("data.json");
+    const data = await fsPromises.readFile("./db/data.json");
     const users = JSON.parse(data);
 
     const user = users.find((user) => user.id === userId);
