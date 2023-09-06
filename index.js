@@ -14,7 +14,7 @@ app.use('/uploads', express.static('uploads'));
 app.use(express.static("views"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors()); // Enable CORS
+app.use(cors()); 
 
 app.use(session({
   secret: process.env.SESSION_SECRET || "secret",
@@ -22,7 +22,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
-const upload = multer({ dest: 'uploads/' }); // Change 'uploads/' to your desired upload directory
+const upload = multer({ dest: 'uploads/' }); 
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -164,14 +164,10 @@ app.get("/login", checkNotAuthentication, (req, res) => {
 
 
 app.post("/login", passport.authenticate("local"), async (req, res) => {
-  const userId = req.user.id; // Get the user ID from Passport session
+  const userId = req.user.id; 
 
-  res.json({ userId }); // Respond with the user ID
+  res.json({ userId });
 });
-
-
-
-
 
 app.get("/logout", (req, res) => {
   req.logout();
