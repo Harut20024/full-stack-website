@@ -19,6 +19,9 @@ Welcome to my portfolio website repository! This project showcases my full-stack
 - Image Uploads: Multer for handling image uploads
 - Styling: CSS for styling and layout
 
+## Admin User
+An admin user has the privilege to manage comments on the website. Admins can delete comments that violate the website's policies or are considered inappropriate.
+
 ## Getting Started
 
 1. Clone the repository to your local machine.
