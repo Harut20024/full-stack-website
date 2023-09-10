@@ -279,6 +279,36 @@ app.delete("/admin/event/:id", async (req, res) => {
 
 
 
+// UPDATE
+app.put("/event/:id", async (req, res) => {
+  const commentId = req.params.id;
+  const updatedComment = req.body.comment; // Assuming your request body contains the updated comment text
+
+  try {
+    const data = await fsPromises.readFile("./db/coment.json", "utf-8");
+    const comments = JSON.parse(data);
+
+    const commentIndex = comments.findIndex(comment => comment.id === commentId);
+
+    if (commentIndex === -1) {
+      res.status(404).json({ error: "Comment not found" });
+      return;
+    }
+
+    comments[commentIndex].comment = updatedComment;
+
+    await fsPromises.writeFile("./db/coment.json", JSON.stringify(comments, null, 2), "utf-8");
+
+    res.json({ message: "Comment updated successfully" });
+  } catch (error) {
+    console.error("Error updating comment:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
+
+
 
 
 

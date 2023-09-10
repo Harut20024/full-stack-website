@@ -1,4 +1,3 @@
-
 /* menu style */
 .menu-bar {
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -32,30 +31,41 @@
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    position: relative; /* Add position relative for pseudo-element positioning */
-    transition: color 0.3s, border-color 0.3s, transform 0.3s; /* Add transition for color, border-color, and transform */
-    padding-bottom: 3px; /* Add some space below the text for the border */
+    position: relative;
+    /* Add position relative for pseudo-element positioning */
+    transition: color 0.3s, border-color 0.3s, transform 0.3s;
+    /* Add transition for color, border-color, and transform */
+    padding-bottom: 3px;
+    /* Add some space below the text for the border */
 }
 
 .menu-list li a::before {
     content: "";
     position: absolute;
     width: 100%;
-    height: 2px; /* Set the height for the border */
-    background: linear-gradient(to right, #9916b3, transparent); /* Gradient color effect */
-    bottom: 0; /* Position the border at the bottom of the link */
-    transform: scaleX(0); /* Initially set the scale to 0 to hide the border */
-    transform-origin: left; /* Set the transform origin to left */
-    transition: transform 0.3s; /* Add transition for transform */
+    height: 2px;
+    /* Set the height for the border */
+    background: linear-gradient(to right, #9916b3, transparent);
+    /* Gradient color effect */
+    bottom: 0;
+    /* Position the border at the bottom of the link */
+    transform: scaleX(0);
+    /* Initially set the scale to 0 to hide the border */
+    transform-origin: left;
+    /* Set the transform origin to left */
+    transition: transform 0.3s;
+    /* Add transition for transform */
 }
 
 .menu-list li a:hover {
     color: #9916b3;
-    transform: translateY(-2px); /* Move the link slightly up on hover */
+    transform: translateY(-2px);
+    /* Move the link slightly up on hover */
 }
 
 .menu-list li a:hover::before {
-    transform: scaleX(1); /* Expand the border to full width on hover */
+    transform: scaleX(1);
+    /* Expand the border to full width on hover */
 }
 
 
@@ -80,7 +90,7 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-   
+
 }
 
 .centered-content h2,
@@ -113,7 +123,7 @@
 }
 
 .start-container {
-    height: 100vh; 
+    height: 100vh;
     position: relative;
     display: flex;
     justify-content: center;
@@ -185,7 +195,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.4; /* Set the opacity to make the video semi-transparent */
+    opacity: 0.4;
+    /* Set the opacity to make the video semi-transparent */
     z-index: -1;
 }
 
@@ -319,6 +330,7 @@ button {
 button:hover {
     background-color: #d21c8f;
 }
+
 .cv-containerCom {
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
@@ -332,7 +344,8 @@ button:hover {
 .cv-containerCom h1 {
     font-size: 24px;
     margin-bottom: 10px;
-    text-align: center; /* Center the "Comments" heading */
+    text-align: center;
+    /* Center the "Comments" heading */
 }
 
 .comment-list {
@@ -343,8 +356,10 @@ button:hover {
 }
 
 .user-info {
-    display: flex; /* Display both image and text in the same line */
-    align-items: center; /* Align items vertically */
+    display: flex;
+    /* Display both image and text in the same line */
+    align-items: center;
+    /* Align items vertically */
     gap: 10px;
 }
 
@@ -357,23 +372,36 @@ button:hover {
 
 .user-name {
     font-weight: bold;
-    margin-bottom: 5px; /* Add some spacing between name and comment */
+    margin-bottom: 5px;
+    /* Add some spacing between name and comment */
 }
 
 .user-comment {
     font-style: italic;
-    margin-top: 5px; /* Add margin to separate name from comment */
+    margin-top: 5px;
+    /* Add margin to separate name from comment */
 }
 
-#admin{
+
+.update-button {
+    border-radius: 100%;
+    height: 20px;
+    width: 10px;
+}
+
+#change-img {
+    margin-top: -10px;
+    margin-left: -15px;
+    height: 25px;
+    width: 30px;
+}
+
+#admin {
     cursor: default;
     margin-top: -25px;
     color: white;
 
 }
-
-
-
 a {
     padding: 10px;
     color: #9916b3;

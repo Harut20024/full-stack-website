@@ -1,5 +1,7 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
+
+
     const ending = document.getElementById("Portfolio")
     const now = new Date();
     const year = now.getFullYear();
@@ -118,8 +120,35 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <img id="user-img" src="/uploads/${comment.img}" alt="User Image">
                         <p>Name: <span class="user-name">${comment.name}</span></p>
                         <p>Comment: <span class="user-comment">${comment.comment}</span></p>
+                        <button class="update-button"> <img id="change-img" src="/photo/change.png"></button>
                     `;
                     commentList.appendChild(commentItem);
+
+                    const updateButton = commentItem.querySelector('.update-button');
+                    updateButton.addEventListener('click', () => {
+                        const elementsInsideCommentItem = commentItem.querySelectorAll('*');
+                        const elementCount = elementsInsideCommentItem.length;
+
+                        if (elementCount === 7 && comment.idofuser === userId) {
+                            const updateItem = document.createElement('div');
+                            updateItem.innerHTML = `
+                                <input value="${comment.comment}"/>
+                                <button class="updateBut">Update</button>
+                            `;
+                            commentItem.appendChild(updateItem);
+
+                            const updateButtonr = updateItem.querySelector('.updateBut');
+
+                            updateButtonr.addEventListener('click', () => {
+                                const inputElement = updateItem.querySelector('input');
+                            
+                                const updatedValue = inputElement.value;
+                            
+                                updateComment(updatedValue,comment.id)
+                            
+                            });
+                        }
+                    });
                 });
             } else {
                 console.log('Failed to fetch comments:', commentsResponse.statusText);
@@ -128,6 +157,36 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error fetching comments:', error);
         }
     }
+    function updateComment(newComment, idOfCom) {
+        const id = idOfCom;
+        const comment = newComment;
+    
+        fetch(`/event/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id,
+                comment,
+            }),
+        })
+            .then((resp) => {
+                if (resp.status === 200) {
+                    console.log("Comment updated successfully.");
+                    commentList.innerHTML = '';
+                    loadComments(); 
+                } else {
+                    console.log("Error updating comment:", resp.statusText);
+                }
+            })
+            .catch((err) => console.error("Error:", err));
+    }
 
     loadComments();
+
+
 });
+
+
+
