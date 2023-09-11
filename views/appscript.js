@@ -115,31 +115,40 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const commentsData = await commentsResponse.json();
                 commentsData.forEach(comment => {
                     const commentItem = document.createElement('div');
-                    commentItem.classList.add('user-info');
+                    commentItem.classList.add('user-infoi');
                     commentItem.innerHTML = `
+                    <div class="user-info">
+                    <div class="user-header">
                         <img id="user-img" src="/uploads/${comment.img}" alt="User Image">
-                        <p>Name: <span class="user-name">${comment.name}</span></p>
-                        <p>Comment: <span class="user-comment">${comment.comment}</span></p>
+                        <p class="user-name">${comment.name}</p>
+                    </div>
+                    <div class="comment-wrapper">
+                        <p class="user-comment">${comment.comment}</p>
                         <button class="update-button"> <img id="change-img" src="/photo/change.png"></button>
-                    `;
+                    </div>
+                </div>
+                
+                `;
+
                     commentList.appendChild(commentItem);
 
                     const updateButton = commentItem.querySelector('.update-button');
                     updateButton.addEventListener('click', () => {
                         const elementsInsideCommentItem = commentItem.querySelectorAll('*');
                         const elementCount = elementsInsideCommentItem.length;
+                        // console.log(elementCount )
                         let updateItem = commentItem.querySelector('.update-item');
 
-                        if (elementCount === 7 && comment.idofuser === userId) {
+                        if (elementCount === 8 && comment.idofuser === userId) {
                             if (!updateItem) {
                                 updateItem = document.createElement('div');
                                 updateItem.classList.add('update-item');
                                 commentItem.appendChild(updateItem);
                             }
                             updateItem.innerHTML = `
-            <input value="${comment.comment}"/>
-            <button class="updateBut">Update</button>
-        `;
+                            <input id = "Updatenput" value="${comment.comment}"/>
+                            <button class="updateBut">Update</button>
+                        `;
 
                             const updateButtonr = updateItem.querySelector('.updateBut');
 

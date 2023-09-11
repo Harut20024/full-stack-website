@@ -345,7 +345,6 @@ button:hover {
     font-size: 24px;
     margin-bottom: 10px;
     text-align: center;
-    /* Center the "Comments" heading */
 }
 
 .comment-list {
@@ -355,46 +354,78 @@ button:hover {
     margin-top: 20px;
 }
 
-.user-info {
+.user-infoi {
+    border: 1px solid;
+    border-radius: 10px;
     display: flex;
-    /* Display both image and text in the same line */
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 10px;
+    align-items: flex-start;
+}
+
+.user-header {
+    display: flex;
     align-items: center;
-    /* Align items vertically */
-    gap: 10px;
+    margin-bottom: 5px;
 }
 
 #user-img {
-    border-radius: 50%;
     width: 40px;
     height: 40px;
-    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .user-name {
     font-weight: bold;
-    margin-bottom: 5px;
-    /* Add some spacing between name and comment */
+    margin: 0;
+}
+
+.comment-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .user-comment {
-    font-style: italic;
     margin-top: 5px;
-    /* Add margin to separate name from comment */
-}
-
-
-.update-button {
-    border-radius: 100%;
-    height: 20px;
-    width: 10px;
+    margin: 0;
 }
 
 #change-img {
-    margin-top: -10px;
-    margin-left: -15px;
-    height: 25px;
-    width: 30px;
+    margin-top: -6px;
+    margin-left: -10px;
+    width: 20px;
+    height: 20px;
 }
+
+.update-button {
+    width: 20px;
+    height: 20px;
+    margin-top: 6px;
+    margin-left: 10px;
+    background-color: #065fd4;
+    color: #ffffff;
+    border: none;
+    border-radius: 100%;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+#Updatenput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #c62929;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+#Updatenput:hover,
+#Updatenput:focus {
+    border-color: #53e11b; 
+}
+
 
 #admin {
     cursor: default;
@@ -402,6 +433,7 @@ button:hover {
     color: white;
 
 }
+
 a {
     padding: 10px;
     color: #9916b3;
