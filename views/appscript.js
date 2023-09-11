@@ -128,27 +128,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                     updateButton.addEventListener('click', () => {
                         const elementsInsideCommentItem = commentItem.querySelectorAll('*');
                         const elementCount = elementsInsideCommentItem.length;
+                        let updateItem = commentItem.querySelector('.update-item');
 
                         if (elementCount === 7 && comment.idofuser === userId) {
-                            const updateItem = document.createElement('div');
+                            if (!updateItem) {
+                                updateItem = document.createElement('div');
+                                updateItem.classList.add('update-item');
+                                commentItem.appendChild(updateItem);
+                            }
                             updateItem.innerHTML = `
-                                <input value="${comment.comment}"/>
-                                <button class="updateBut">Update</button>
-                            `;
-                            commentItem.appendChild(updateItem);
+            <input value="${comment.comment}"/>
+            <button class="updateBut">Update</button>
+        `;
 
                             const updateButtonr = updateItem.querySelector('.updateBut');
 
                             updateButtonr.addEventListener('click', () => {
                                 const inputElement = updateItem.querySelector('input');
-                            
                                 const updatedValue = inputElement.value;
-                            
-                                updateComment(updatedValue,comment.id)
-                            
+                                updateComment(updatedValue, comment.id);
                             });
+                        } else {
+                            if (updateItem) {
+                                commentItem.removeChild(updateItem);
+                            }
                         }
                     });
+
                 });
             } else {
                 console.log('Failed to fetch comments:', commentsResponse.statusText);
@@ -160,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     function updateComment(newComment, idOfCom) {
         const id = idOfCom;
         const comment = newComment;
-    
+
         fetch(`/event/${id}`, {
             method: "PUT",
             headers: {
@@ -175,7 +181,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (resp.status === 200) {
                     console.log("Comment updated successfully.");
                     commentList.innerHTML = '';
-                    loadComments(); 
+                    loadComments();
                 } else {
                     console.log("Error updating comment:", resp.statusText);
                 }
