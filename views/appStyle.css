@@ -266,16 +266,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#cv-right p {
+.cv-right p {
     margin-right: 30px;
     margin-left: 20px;
     color: white;
     font-size: 18px;
-    font-weight: bold; 
     line-height: 1.6;
-    max-width: 1000px;
+    max-width: 600px;
 }
-
 
 .cv-container3 {
     border-top: 2px solid rgba(255, 255, 255, 0.2);
