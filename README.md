@@ -8,6 +8,7 @@ Welcome to my portfolio website repository! This project showcases my full-stack
 - Personal Biography: Learn about me, my background, and my skills.
 - Project Showcase: Browse through my completed projects and view details about each one.
 - Comment System: Registered users can leave comments on the website. Comments are stored in a database and associated with the user's profile.
+- CRUD Operations: The website supports CRUD (Create, Read, Update, Delete) operations for comments, allowing administrators to manage comments effectively.
 - Responsive Design: The website is designed to be responsive and accessible across various devices and screen sizes.
 
 ## Technologies Used
@@ -29,6 +30,15 @@ An admin user has the privilege to manage comments on the website. Admins can de
 3. Install dependencies using `npm install`.
 4. Run the project using `npm run dev`.
 5. Access the website in your browser at `http://localhost:3000`.
+
+
+## CRUD Operations for Comments
+- As an user, you can perform CRUD operations on comments:
+
+1. Create Comment: Add new comments and provide valuable feedback.
+2. Read Comment: View comments.
+3. Update Comment: Edit comments to correct errors or provide additional information.
+4. Delete Comment: as Admin you can remove inappropriate or irrelevant comments.
 
 ## Usage
 
